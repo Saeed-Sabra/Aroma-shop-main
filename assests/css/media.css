@@ -1,0 +1,184 @@
+@media (max-width:992px){
+
+    .container{
+        width: 88%;
+    }
+
+.menu{
+margin: auto;
+    width: 52%;
+    margin-left: -15px;
+    padding-top: 5px;
+}
+
+
+.logo{
+    width:20%;
+    margin-right: 30px;
+   
+}
+
+.icons{
+    padding-left: 2px;
+    margin-right: 5px;
+}
+
+.navbar .button{
+    padding: 6px 23px;
+
+}
+
+.header .button a {
+    color: #fff;
+    text-transform: capitalize;
+    border: 1px #333;
+    border: solid 1px;
+    padding: 10px 30px;
+    border-radius: 30px;
+    border-color: transparent;
+    background-color: blue;
+    transition: background-color 1s;
+  }
+
+.heroslide{
+    height: 120vh;
+}
+
+      .heroslideimg {
+        float: left;
+        width: 45%;
+        margin-left: 20px;   
+      }
+
+      .productimg {
+        float: left;
+        width: 45%;
+        margin-right: 35px;
+        text-align: center;
+        margin-bottom: 25px;
+      }
+
+      .products h2 {
+        font-size: 50px;
+        margin: 20px 0;
+        font-weight: 700;
+      }
+
+      .productimg p , h3{
+        padding-top: 10px;
+        font-size: 20px;
+    }
+
+}
+
+/* ............................................................. */
+
+@media (max-width: 768px){
+    .menu , .button{
+        display: none;
+    }
+
+    .icons .fa-bars {
+        display: unset;
+      }
+
+      .icons{
+        float: right;
+        width: 90px;
+      }
+
+      .header-img {
+        float: none;
+        width: 100%;
+      }
+
+      .header-content {
+        float: none;
+        padding-top: 100px;
+        text-align: center;
+        margin: auto;
+        width: 500px;
+        padding-right: 50px;
+      }
+
+      .fpara {
+        color: #333;
+        font-size: 25px;
+        padding-bottom: 20px;
+      }
+      
+      .header-content h1 {
+        font-size: 60px;
+        font-weight: 700;
+        padding-bottom: 20px;
+      }
+
+      .secpara {
+        color: #333;
+        font-size: 16px;
+
+      }
+
+.heroslide{
+    height: 300vh;
+}
+
+      .heroslideimg {
+        float: none;
+        width: 90%;
+        margin-left: 20px;   
+        height: 100vh;  
+        margin: auto;   
+      }
+
+      .productimg {
+        float: none;
+        width: 90%;
+        margin-right: 5px;
+        text-align: center;
+        padding-bottom: 50px;
+        margin: auto;
+      }
+
+      .products h2 {
+        font-size: 50px;
+        margin: 20px 0;
+        font-weight: 700;
+       
+      }
+
+      .products  {
+        padding-top: 100px;
+      }
+
+      .productimg p , h3{
+        padding-top: 10px;
+        font-size: 20px;
+       
+    }
+}
+/* ................................................. */
+
+@media (max-width: 576px){
+  .header-content {
+    float: none;
+    padding: 100px 50px;
+    text-align: center;
+    margin: auto;
+    width: 411px;
+    
+}
+
+.heroslideimg {
+  float: none;
+  width: 90%;
+  margin-left: 20px;
+  height: 60vh;
+  margin: auto;
+}
+
+.heroslide {
+  height: 180vh;
+  padding-top: 20px;
+}
+}
