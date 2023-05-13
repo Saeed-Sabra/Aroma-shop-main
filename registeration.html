@@ -17,18 +17,19 @@
 
   <div class="container w-75" id="container">
     <div class="form-container sign-up-container">
-      <form action="#">
+      <form action="php/signup.php" method="post">
         <h1>Create Account</h1>
         <div class="social-container">
           <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
           <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
           <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
         </div>
-        <input type="text" placeholder="Name" />
-        <input type="email" placeholder="Email" />
-        <input type="password" placeholder="Password" />
+
+        <input type="text" placeholder="Name" name="fullName" />
+        <input type="email" placeholder="Email" name="email" />
+        <input type="password" placeholder="Password" name="password" />
         <input type="file" name="file" id="file">
-        <select name="select" id="">
+        <select name="select">
           <option value="">Select Role</option>
           <option value="admin">Admin</option>
           <option value="user">User</option>
@@ -46,7 +47,7 @@
         </div>
         <input type="email" placeholder="Email" />
         <input type="password" placeholder="Password" />
-        <select name="select" id="">
+        <select name="select">
           <option value="">Select Role</option>
           <option value="admin">Admin</option>
           <option value="user">User</option>
