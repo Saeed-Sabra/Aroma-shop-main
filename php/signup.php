@@ -1,22 +1,31 @@
 <?php
 include 'DBconnection.php';
 
-if (!empty($_POST['fullName']) && !empty($_POST['email']) && !empty($_POST['password']) && !empty($_FILES["file"]["name"])) {
-    $username = $_POST['fullName'];
+if (!empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['password']) && !empty($_FILES["file"]["name"])) {
+
+    $username = $_POST['name'];
     $email = $_POST['email'];
     $password = md5($_POST['password']);
 
-    $targetDir = "../img/";
-    $fileName = basename($_FILES["file"]["name"]);
-    echo $fileName;
-    $var1 = rand(1111,9999);
-    $var2 = rand(1111,9999);
-    $var3 = $var1.$var2;
-    $var3 = md5($var3);
-    $fileName = $var3. $fileName;
-    $targetFilePath = $targetDir . $fileName;
-    // استخراج الامتداد
-    $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
+    
+    // $targetDir = "../img/";
+    // $fileName = $_FILES["file"]["name"];
+    
+    $var1 = rand(1111,9999);  // generate random number in $var1 variable
+    $var2 = rand(1111,9999);  // generate random number in $var2 variable
+
+    $var3 = $var1.$var2;  // concatenate $var1 and $var2 in $var3
+    $var3 = md5($var3);   // convert $var3 using md5 function and generate 32 characters hex number
+
+    $fnm = $_FILES["file"]["name"];    // get the image name in $fnm variable
+    $dst = "../img/".$var3.$fnm;  // storing image path into the {all_images} folder with 32 characters hex number and file name
+    $dst_db = "img/".$var3.$fnm; // storing image path into the database with 32 characters hex number and file name
+
+    // $targetFilePath1 = $targetDir . $var3 . $fileName;
+
+    // $targetFilePath = "img/" . $var3 . $fileName;
+    
+    $fileType = pathinfo($dst_db,PATHINFO_EXTENSION);
     $allowTypes = array('jpg','png','jpeg','gif');
 
     // -----------------------------------
@@ -50,11 +59,11 @@ if (!empty($_POST['fullName']) && !empty($_POST['email']) && !empty($_POST['pass
         } else {
             if(in_array($fileType, $allowTypes)){
                 // Upload file to server
-                if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
-                    $sql = 'INSERT INTO user VALUES (?,?,?,?)';
+                if(move_uploaded_file($_FILES["file"]["tmp_name"], $dst)){
+                    $sql = 'INSERT INTO user(name, email, password,file) VALUES (?,?,?,?)';
                     // check sql syntax
                     $res = $conn->prepare($sql);
-                    $res->bind_param('ssss', $username, $email,$fileName, $password);
+                    $res->bind_param('ssss', $username, $email,$password,$dst_db);
                     $res->execute();
                     if ($res->error) {
                         $myJSON = 'error';
@@ -87,7 +96,8 @@ if (!empty($_POST['fullName']) && !empty($_POST['email']) && !empty($_POST['pass
             // }
         }
     }
-} else {
+}
+else {
     echo "Enter All Information";
 }
 
@@ -98,15 +108,15 @@ if (!empty($_POST['fullName']) && !empty($_POST['email']) && !empty($_POST['pass
 // <?php
     // include "DBconnection.php";
     
-    // if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['pass']) && isset($_FILES["file"]["name"])) {
+    // if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['password']) && isset($_FILES["file"]["name"])) {
     //     $name = $_POST['name'];
     //     $email = $_POST['email'];
-    //     $pass = md5($_POST['pass']);
+    //     $password = md5($_POST['password']);
     //     $file = $_FILES["file"]["name"];
 
-    //     $sql = "INSERT INTO user (name, email, password, file) VALUES ('$name', '$email', '$pass', '$file')";
+    //     $sql = "INSERT INTO user (name, email, password, file) VALUES ('$name', '$email', '$password', '$file')";
     //     $result = mysqli_query($conn, $sql);
-    //     echo $result;
+        
     //     $var1 = rand(1111,9999);  // generate random number in $var1 variable
     //     $var2 = rand(1111,9999);  // generate random number in $var2 variable
 
@@ -120,7 +130,7 @@ if (!empty($_POST['fullName']) && !empty($_POST['email']) && !empty($_POST['pass
 
     //     move_uploaded_file($_FILES["image"]["tmp_name"],$dst);
 
-    //     $sql1 = "UPDATE user SET img = '$dst_db' WHERE email = $email";
+    //     $sql1 = "UPDATE user SET file = '$dst_db' WHERE email = $email";
 
     //     $result1 = mysqli_query($conn, $sql1);
 
