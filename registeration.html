@@ -41,15 +41,15 @@
       </form>
     </div>
     <div class="form-container sign-in-container">
-      <form action="#">
+      <form action="php/login.php" method="post">
         <h1>Sign in</h1>
         <div class="social-container">
           <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
           <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
           <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
         </div>
-        <input type="email" placeholder="Email" />
-        <input type="password" placeholder="Password" />
+        <input type="email" placeholder="Email" name="email" />
+        <input type="password" placeholder="Password" name="password" />
         <select name="select">
           <option value="">Select Role</option>
           <option value="admin">Admin</option>
