@@ -2,12 +2,9 @@
 
 include 'DBconnection.php';
 
-echo $_POST["email"];
-echo $_POST["password"];
-if (!empty($_POST["email"]) && !empty($_POST['password']) && !empty($_POST['select'])) {
+if (!empty($_POST["email"]) && !empty($_POST['password'])) {
     $email = $_POST['email'];
     $password = md5($_POST['password']);
-    $select = $_POST['select'];
 
 
     $sql = "SELECT id FROM user WHERE email = ? AND password = ?";

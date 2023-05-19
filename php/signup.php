@@ -1,6 +1,7 @@
 <?php
 include 'DBconnection.php';
 echo $_POST['select'];
+// echo $_FILES["file"]["name"];
 if (
     !empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['password']) &&
     !empty($_FILES["file"]["name"]) && !empty($_POST['select'])
@@ -70,8 +71,7 @@ if (
                         $myJSON = 'error';
                         echo $myJSON;
                         return 0;
-                    }
-                    else {
+                    } else {
                         header("Location:../registeration.html");
                         exit();
                     }
@@ -91,8 +91,7 @@ if (
                 $myJSON = 'error';
                 echo $myJSON;
                 return 0;
-            }
-            else {
+            } else {
                 header("Location:../registeration.html");
                 exit();
             }

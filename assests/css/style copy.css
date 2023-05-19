@@ -1,0 +1,140 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+body{
+    font-family: 'Oswald', sans-serif;
+}
+.container{
+    width: 80%;
+    margin: auto;
+}
+header{
+    min-height: 40px;
+}
+nav ul#user_info{
+    display: none;
+    color: #F10086;
+}
+header{
+    background-color: #333;
+    padding: 10px 0;
+}
+.header_content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header_content .brand{
+    text-decoration: none;
+    font-size: 32px;
+    color: white;
+    transition: 0.6s;
+}
+nav ul{
+    display: flex;
+    list-style: none;
+}
+
+ul li a {
+   text-decoration: none;
+   display: block;
+   color: white;
+   min-width: 70px;
+   transition: 0.4s;
+}
+.header_content a:hover{
+    color:#1C0A00;
+}
+ul li #links:hover{
+    color: #cf32cf;
+    transform: scale(1.2);
+}
+.sec_form h2{
+    color: #F10086;
+    font-size: 45px;
+
+}
+.sec_form input{
+    display: block;
+    width: 100%;
+    margin:10px 0;
+    height: 40%;
+    border: 1px solid #B8FFF9 ;
+    padding: 10px;
+    font-family: 'Oswald', sans-serif;
+    outline: 0;
+}
+
+.sec_form{
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%,-50%);
+   background-color: #FFCC1D;
+   width: 60%;
+   text-align: center;
+   padding: 20px;
+}
+.sec_form input[type=submit]{
+    font-size: 25px;
+}
+.sec_form input[type=submit]:hover{
+    opacity: 0.8;
+}
+.products{
+    width:75% ;
+    margin: 10px auto;
+}
+.product_item{
+    position: relative;
+    display: flex;
+    width: 100%;
+    background-color: #f8ecec;
+    margin-bottom: 10px;
+    border-radius: 50% 10%  50% 10%;
+    transition: 0.7s;
+}
+.product_item_image{
+    width: 100px;
+    height: 100px;
+    margin-right: 10px;
+    border-radius: 50%;
+    transition: 0.7s;
+}
+.add_to_cart{
+    position: absolute;
+    width: 100px;
+    height: 20px;
+    top: 7px;
+    right: 7px;
+    color: white;
+    border-radius: 8px;
+    background-color: #E60965;
+    border: 0;
+    font-size: 14px;
+    transition: 0.5s;
+}
+.add_to_cart:hover{
+    color: #470D21;
+    transform: scale(1.1);
+}
+.fas{
+    position: absolute;
+    bottom: 7px;
+    right: 7px;
+    transition: 0.5s;
+    color: #E60965;
+}
+.fas:hover{
+    transform: scale(1.2);
+}
+.product_item:hover{
+    border-radius: 0;
+    background-color: #E4AEC5;
+    transform: scale(1.06);
+}
+.product_item_image:hover{
+    border-radius: 0;
+}

@@ -17,7 +17,6 @@
 </head>
 
 <body class="card bg-light mb-3">
-    <h1>By Ali Jamal Al Barghouth</h1>
     <header>
         <div class="container">
             <div class="header_content">
@@ -35,7 +34,7 @@
             </div>
         </div>
     </header>
-
+    <!-- 
     <section class="Home">
         <div class="contaner">
             <div class="products">
@@ -89,7 +88,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <br>
     <h2 class="text-uppercase font-weight-bold p-3 mb-2 bg-warning text-dark"> User information</h2>
@@ -133,11 +132,11 @@
         ?>
     </table>
     <hr>
-    <form action="register.php" method="post">
+    <form action="signup.php" method="post">
         <h2 class="text-uppercase font-weight-bold p-3 mb-2 bg-warning text-dark">Register User</h2>
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">User Name</label>
-            <input type="text" name="userName" class="form-control userName" id="exampleInputEmail1"
+            <input type="text" name="name" class="form-control userName" id="exampleInputEmail1"
                 aria-describedby="emailHelp">
         </div>
         <div class="mb-3">
@@ -150,6 +149,15 @@
             <label for="exampleInputPassword1" class="form-label">Password</label>
             <input type="password" name="password" class="form-control password" id="exampleInputPassword1">
         </div>
+        <div class="mb-3">
+            <label for="file" class="form-label">Image</label>
+            <input type="file" name="file" class="form-control " id="file">
+            <!-- <input type="file" name="file" id="file"> -->
+        </div>
+        <select name="select" id="">
+            <option value="user" selected>User</option>
+        </select>
+
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
     <hr>
@@ -157,7 +165,7 @@
         <h2 class="text-uppercase font-weight-bold p-3 mb-2 bg-warning text-dark">Register Admin</h2>
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">User Name</label>
-            <input type="text" name="userName" class="form-control userName" id="exampleInputEmail1"
+            <input type="text" name="name" class="form-control userName" id="exampleInputEmail1"
                 aria-describedby="emailHelp">
         </div>
         <div class="mb-3">
@@ -172,14 +180,26 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-    <script src="../js/all.min.js"></script>
-    <script src="../js/bootstrap.bundle.min.js"></script>
-    <script src="../js/bootstrap.bundle.min.js.map"></script>
+    <script src="../javaScript/all.min.js"></script>
+    <script src="../javaScript/bootstrap.bundle.min.js"></script>
+    <script src="../javaScript/bootstrap.bundle.min.js.map"></script>
     <script>
         function deleteUser(id) {
             $.ajax({
                 type: "POST",
-                url: "deleteUser.php",
+
+                url: "delete_user.php",
+                data: {
+                    id: id
+                },
+            });
+            document.getElementById('tr-' + id).remove();
+        }
+        function updateUser(id) {
+            $.ajax({
+                type: "POST",
+
+                url: "update_user.php",
                 data: {
                     id: id
                 },

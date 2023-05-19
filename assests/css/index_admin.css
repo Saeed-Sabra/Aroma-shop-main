@@ -1,0 +1,22 @@
+
+form{
+    margin-top: 40px;
+}
+form div
+{
+    padding: 10px;
+}
+form button {
+    margin-left: 10px;
+}
+h2{
+    text-align: center;
+    text-transform: capitalize;
+}
+ a{
+    text-decoration: none;
+    color: white;
+}
+.table{
+    padding: 5px;
+}
