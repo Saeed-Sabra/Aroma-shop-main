@@ -28,12 +28,14 @@ if (!empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['password
         $myJSON = 'error';
         echo $myJSON;
         return 0;
+        // fetch(); لنصل الداتا بالاري
+        // num_rows لفحص اذا كان يوجد داتا بالاري
     } else {
         if ($res->num_rows > 0) {
             echo "<div> Email is exist </div>";
             return;
         } else {
-            $sql = 'INSERT INTO admin (name, email, password) VALUES (?,?,?)';
+            $sql = 'INSERT INTO user (name, email, password) VALUES (?,?,?)';
             // check sql syntax
             $i = 0;
             $i++;

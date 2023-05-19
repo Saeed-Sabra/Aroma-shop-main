@@ -1,22 +1,64 @@
-
-form{
+form {
     margin-top: 40px;
 }
-form div
-{
+
+form div {
     padding: 10px;
 }
+
 form button {
     margin-left: 10px;
 }
-h2{
+
+h2 {
     text-align: center;
     text-transform: capitalize;
 }
- a{
+
+a {
     text-decoration: none;
     color: white;
 }
-.table{
+
+.table {
     padding: 5px;
+}
+
+.container {
+    display: grid;
+}
+
+.header_content {
+    /* background-color: #0d0d0d; */
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-size: 20px;
+    display: grid;
+}
+
+#links {
+    text-align: left;
+    margin-bottom: 0;
+    padding-left: 0;
+
+}
+
+#links li {
+    display: inline-block;
+    padding-top: 10px;
+    font-size: 25px;
+    font-weight: bold;
+
+}
+
+#links li:nth-child(2) {
+    float: right;
+}
+
+#links li a {
+    color: #212529 !important;
+    text-decoration: none;
+    padding: 5px;
+
 }

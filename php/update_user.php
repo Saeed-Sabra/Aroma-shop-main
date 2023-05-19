@@ -1,118 +1,183 @@
 <?php
+
 include 'DBconnection.php';
 
-$id = $_POST['id'];
 
-$sql = 'update FROM user WHERE id = ?';
-$res = $conn->prepare($sql);
-$res->bind_params('i', $id);
-$res->execute();
+$name = "";
+$number = "";
+$email = "";
+$pass = "";
 
-// <!DOCTYPE html>
-// <html>
-//   <head>
-// <meta name="viewport" content="width=device-width, initial-scale=1.0">
-// <link rel="stylesheet"  href="style.css"> 
-//  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-//    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-// <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-// <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  
-// <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-// <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-// </head>
-// <body>
-  
-//     <div class="container11">
-//         <h1 class="w3-padding-32 w3-center">Update user details</h1>
-// <form method="post" action="update.php" >
+$name_err = $number_err = $email_err = $pass_err = "";
+
+if (isset($_POST["email"]) && !empty($_POST["email"])) {
+    $email = $_POST["email"];
+
+    $input_name = trim($_POST["name"]);
+    if (empty($input_name)) {
+        $name_err = "Please enter a name.";
+    } elseif (!filter_var($input_name, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/^[a-zA-Z\s]+$/")))) {
+        $name_err = "Please enter a valid name.";
+    } else {
+        $name = $input_name;
+    }
+
+    $input_number = trim($_POST["number"]);
+    if (empty($input_number)) {
+        $number_err = "Please enter a number.";
+    } else {
+        $number = $input_number;
+    }
+
+    $input_email = trim($_POST["email"]);
+    if (empty($input_email)) {
+        $email_err = "Please enter an email.";
+
+    } else {
+        $email = $input_email;
+    }
+
+    $input_pass = trim($_POST["password"]);
+    if (empty($input_pass)) {
+        $pass_err = "Please enter a password.";
+    } else {
+        $pass = $input_pass;
+    }
 
 
-      
-//   <div class="input-group1">
-//   <label for="username">Username</label>
-//      <input type="text" name="username" placeholder="Enter username" id="username" value="" required>
-        
-      
-//   </div> 
-//   <br>	
-//   <div class="input-group1"> 
-//         <label for="email">Email Id</label>
-//         <input type="email" id="email" name="email" placeholder="Enter your Email" value="" required>
-//         <span id='message2'></span>
-//   </div> 
-//   <br>
-//   <div class="input-group1">
-//   <label for="fname">Name</label>
-//      <input type="text" name="name" placeholder="Enter name" id="name" value="" required>
-     
 
-      
-//   </div>    
-//    <br><br>  
-  
-//   <div class="input-group1">
-//           <label for="date">Date  of Birth</label> 
-//         <input type="date" name="date" placeholder="Choose Date of Birth" id="date" min="1950-01-01" value="" required>
+    if (empty($name_err) && empty($number_err) && empty($email_err) && empty($pass_err)) {
+        $sql = "UPDATE admin_form SET name=?, number=?, email=? , password=?  WHERE email=?";
 
-//   </div>
 
-//   <br><br><br>
 
-//   <div class="input-group1">
-//           <label for="address">Address</label>
-//         <textarea name="address"  placeholder="Enter Address" id="address" rows="3" cols="50" value="" required> </textarea>
+        if ($stmt = mysqli_prepare($conn, $sql)) {
 
-//   </div>
-//   <br>
-    
-//   <div class="input-group1"> 
-//         <label for="password1">Password</label>
-//         <input type="password" id="password1" name="password1" placeholder="Enter your password" value="" required>
-//         <span id='message3'></span>
-//   </div> 
-// <br>
-// <div class="input-group1"> 
-//         <label for="password2">Confirm Password</label>
-//         <input type="password" id="password2" name="password2" placeholder="Retype password" value="" required>
-//         <br>
-//         <span id='message3'></span>
-//   </div> 
-//   <br>
-//   <div class="input-group1">
-//     <input type="submit" class="btn" name="reg_user" id="enter" disabled="true" value="Update Details">
-//   </div>
+            mysqli_stmt_bind_param($stmt, "sssss", $param_name, $param_number, $param_email, $param_pass, $param_email);
+            $param_name = $name;
+            $param_number = $number;
+            $param_email = $email;
+            $param_pass = $pass;
 
-// </form>
-// <script>
-//             $('#password1, #password2').on('keyup', function () {
-//               if ($('#password1').val() == $('#password2').val()) 
-//                {
-//                             $('#message3').html('Matched').css('color', 'green');
-//                             $("#enter").prop('disabled',false);
-//                } 
-//                else 
-//                             $('#message3').html('Password Missmatch').css('color', 'red');
-//                }
-//                );
-//       </script>
-// <script>
-//       $('#email').on('keyup',function(){
-//                 var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-//                 var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-//                 var email = $("#email").val();
-//                 if(email.match(mailformat)){
-//                     $('#message2').html('valid').css('color','green');
-//                 }
-//                 else
-//                     $('#message2').html('Invalid Email').css('color','red');
-                    
-//             }
-//             );
-//   </script>
-    
-//   </div>
- 
+            if (mysqli_stmt_execute($stmt)) {
+                header("location: admin_page.php");
+                exit();
+            } else {
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+        }
 
-// </body>
-// </html>
+        mysqli_stmt_close($stmt);
+    }
+
+    mysqli_close($conn);
+} else {
+    if (isset($_GET["email"]) && !empty(trim($_GET["email"]))) {
+        $email = trim($_GET["email"]);
+
+        $sql = "SELECT * FROM admin_form WHERE email = ?";
+        if ($stmt = mysqli_prepare($conn, $sql)) {
+            mysqli_stmt_bind_param($stmt, "s", $param_email);
+
+            $param_email = $email;
+
+            if (mysqli_stmt_execute($stmt)) {
+                $result = mysqli_stmt_get_result($stmt);
+
+                if (mysqli_num_rows($result) == 1) {
+
+                    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                    $name = $row["name"];
+                    $number = $row["number"];
+                    $email = $row["email"];
+                    $pass = $row["password"];
+                } else {
+
+                    header("location: error.php");
+                    exit();
+                }
+
+
+            } else {
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+        }
+
+        mysqli_stmt_close($stmt);
+
+        mysqli_close($conn);
+    } else {
+        header("location: error.php");
+        exit();
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Update Record</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .wrapper {
+            width: 600px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="mt-5">Update Record</h2>
+                    <p>Please edit the input values and submit to update the employee record.</p>
+                    <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" name="name"
+                                class="form-control <?php echo (!empty($name_err)) ? 'is-invalid' : ''; ?>"
+                                value="<?php echo $name; ?>">
+                            <span class="invalid-feedback">
+                                <?php echo $name_err; ?>
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label>Number</label>
+                            <textarea name="number"
+                                class="form-control <?php echo (!empty($number_err)) ? 'is-invalid' : ''; ?>"><?php echo $number; ?></textarea>
+                            <span class="invalid-feedback">
+                                <?php echo $number_err; ?>
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <textarea name="email"
+                                class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>"><?php echo $email; ?></textarea>
+                            <span class="invalid-feedback">
+                                <?php echo $email_err; ?>
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" name="password"
+                                class="form-control <?php echo (!empty($pass_err)) ? 'is-invalid' : ''; ?>"
+                                value="<?php echo $pass; ?>">
+                            <span class="invalid-feedback">
+                                <?php echo $pass_err; ?>
+                            </span>
+                        </div>
+
+                        <input type="submit" class="btn btn-primary" value="update">
+                        <a href="admin_page.php" class="btn btn-secondary ml-2">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
